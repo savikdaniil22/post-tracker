@@ -1,20 +1,41 @@
-import { Container, Typography, CircularProgress, Button } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 import { useGetPostByIdQuery } from "../api/postsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { toggleFavorite } from "../store/favoritesSlice";
+import { Loader } from "../components/Loader";
 
 export const PostDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data: post, error, isLoading } = useGetPostByIdQuery(Number(id));
+  const dispatch = useDispatch();
+  const isFavorite = useSelector((state: RootState) => state.favorites.favorites.includes(Number(id)));
 
-  if (isLoading) return <CircularProgress />;
-  if (error) return <Typography color="error">Ошибка загрузки</Typography>;
+  if (isLoading) return <Loader />;
+
+  if (error)
+    return (
+      <Typography color="error" align="center">
+        Ошибка загрузки
+      </Typography>
+    );
 
   return (
     <Container sx={{ marginTop: 5 }}>
       <Typography variant="h4" gutterBottom>
         {post?.title}
       </Typography>
-      <Typography variant="body1">{post?.body}</Typography>
+      <Typography variant="body1" paragraph>
+        {post?.body}
+      </Typography>
+      <Button
+        variant={isFavorite ? "outlined" : "contained"}
+        color={isFavorite ? "secondary" : "primary"}
+        onClick={() => dispatch(toggleFavorite(Number(id)))}
+        sx={{ marginRight: 2 }}>
+        {isFavorite ? "Убрать из избранного" : "Добавить в избранное"}
+      </Button>
       <Button variant="contained" color="primary" component={Link} to="/">
         Назад к постам
       </Button>
