@@ -26,18 +26,15 @@ export const PostDetails = () => {
       <Typography variant="h4" gutterBottom>
         {post?.title}
       </Typography>
-      <Typography variant="body1" paragraph>
-        {post?.body}
-      </Typography>
+      <Typography variant="body1">{post?.body}</Typography>
+      <Button variant="contained" color="primary" component={Link} to="/" sx={{ marginRight: 2 }}>
+        Назад к постам
+      </Button>
       <Button
         variant={isFavorite ? "outlined" : "contained"}
         color={isFavorite ? "secondary" : "primary"}
-        onClick={() => dispatch(toggleFavorite(Number(id)))}
-        sx={{ marginRight: 2 }}>
+        onClick={() => dispatch(toggleFavorite(Number(id)))}>
         {isFavorite ? "Убрать из избранного" : "Добавить в избранное"}
-      </Button>
-      <Button variant="contained" color="primary" component={Link} to="/">
-        Назад к постам
       </Button>
     </Container>
   );

@@ -15,14 +15,14 @@ export const PostCard: React.FC<Post> = ({ id, title, body }) => {
         <Typography variant="h5">{title}</Typography>
         <Typography variant="body2">{body.slice(0, 100)}...</Typography>
       </CardContent>
-      <Button component={Link} to={`/post/${id}`} variant="contained">
+      <Button component={Link} to={`/post/${id}`} variant="contained" sx={{ mb: 2, ml: 2 }}>
         Подробнее
       </Button>
       <Button
         variant={isFavorite ? "outlined" : "contained"}
         color={isFavorite ? "secondary" : "primary"}
         onClick={() => dispatch(toggleFavorite(id))}
-        sx={{ marginLeft: 1 }}>
+        sx={{ mb: 2, ml: 2 }}>
         {isFavorite ? "Убрать из избранного" : "В избранное"}
       </Button>
     </Card>

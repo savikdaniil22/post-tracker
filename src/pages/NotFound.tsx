@@ -7,9 +7,7 @@ export const NotFound = () => {
       <Typography variant="h4" gutterBottom>
         404 - Страница не найдена
       </Typography>
-      <Typography variant="body1" paragraph>
-        Похоже, что вы перешли по неверному адресу.
-      </Typography>
+      <Typography variant="body1">Похоже, что вы перешли по неверному адресу.</Typography>
       <Button variant="contained" color="primary" component={Link} to="/">
         Вернуться на главную
       </Button>
