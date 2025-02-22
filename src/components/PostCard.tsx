@@ -9,7 +9,7 @@ export const PostCard: React.FC<Post> = ({ id, title, body }) => {
         <Typography variant="h5">{title}</Typography>
         <Typography variant="body2">{body.slice(0, 100)}...</Typography>
       </CardContent>
-      <Button component={Link} to={`/post/${id}`}>
+      <Button component={Link} to={`/post/${id}`} variant="contained">
         Подробнее
       </Button>
     </Card>
