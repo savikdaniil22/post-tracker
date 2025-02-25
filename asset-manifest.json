@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/post-tracker/static/js/main.7bf07d79.js",
+    "index.html": "/post-tracker/index.html",
+    "main.7bf07d79.js.map": "/post-tracker/static/js/main.7bf07d79.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.7bf07d79.js"
+  ]
+}
