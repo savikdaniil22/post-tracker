@@ -25,3 +25,7 @@ export interface GetPostsResponse {
   posts: Post[];
   totalPages: number;
 }
+
+export interface FavoritesState {
+  favorites: number[];
+}

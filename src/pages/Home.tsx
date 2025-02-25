@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
 import { useGetPostsQuery } from "../api/postsApi";
 import { PostCard } from "../components/PostCard";
@@ -9,8 +10,16 @@ import { Pagination } from "../components/Pagination";
 const POSTS_PER_PAGE = 5;
 
 export const Home = () => {
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const initialSearch = searchParams.get("search") || "";
+
+  const [page, setPage] = useState(initialPage);
+  const [search, setSearch] = useState(initialSearch);
+
+  useEffect(() => {
+    setSearchParams({ page: page.toString(), search });
+  }, [page, search, setSearchParams]);
 
   const { data, error, isLoading } = useGetPostsQuery({ page, limit: POSTS_PER_PAGE, search });
 

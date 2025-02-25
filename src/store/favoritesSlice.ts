@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FavoritesState } from "../types/types";
 
 const loadFavorites = (): number[] => {
   const stored = localStorage.getItem("favorites");
   return stored ? JSON.parse(stored) : [];
 };
-
-interface FavoritesState {
-  favorites: number[];
-}
 
 const initialState: FavoritesState = {
   favorites: loadFavorites(),

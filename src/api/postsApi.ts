@@ -7,7 +7,7 @@ export const postsApi = createApi({
   endpoints: (builder) => ({
     getPosts: builder.query<GetPostsResponse, GetPostsRequest>({
       query: ({ page, limit, search }) => {
-        const searchParam = search ? `&q=${search}` : "";
+        const searchParam = search ? `&title_like=${search}` : "";
         return `posts?_page=${page}&_limit=${limit}${searchParam}`;
       },
       transformResponse: (response: Post[], meta): GetPostsResponse => {
