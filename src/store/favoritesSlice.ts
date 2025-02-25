@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FavoritesState } from "../types/types";
 
-const loadFavorites = (): number[] => {
-  const stored = localStorage.getItem("favorites");
-  return stored ? JSON.parse(stored) : [];
-};
-
 const initialState: FavoritesState = {
-  favorites: loadFavorites(),
+  favorites: [],
 };
 
 const favoritesSlice = createSlice({
@@ -21,7 +16,6 @@ const favoritesSlice = createSlice({
       } else {
         state.favorites.push(postId);
       }
-      localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
   },
 });
