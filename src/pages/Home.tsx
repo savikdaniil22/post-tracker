@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import { useGetPostsQuery } from "../api/postsApi";
 import { PostCard } from "../components/PostCard";
 import { Loader } from "../components/Loader";
@@ -27,16 +27,26 @@ export const Home = () => {
   if (error) return <Typography color="error">Ошибка загрузки данных</Typography>;
 
   return (
-    <Container>
+    <Container sx={{ display: "flex", flexDirection: "column", backgroundColor: "#FAFAFA", height: "100vh" }}>
       <SearchBar search={search} setSearch={setSearch} />
 
-      {data?.posts.length ? (
-        data.posts.map((post) => <PostCard key={post.id} {...post} />)
-      ) : (
-        <Typography align="center">Ничего не найдено</Typography>
-      )}
+      <Box
+        sx={{
+          maxHeight: "800px",
+          overflowY: "auto",
+          marginTop: 2,
+          paddingRight: 1,
+        }}>
+        {data?.posts.length ? (
+          data.posts.map((post) => <PostCard key={post.id} {...post} />)
+        ) : (
+          <Typography align="center">Ничего не найдено</Typography>
+        )}
+      </Box>
 
-      <Pagination page={page} totalPages={data?.totalPages || 1} setPage={setPage} />
+      <Box sx={{ mt: "20px", mb: "20px" }}>
+        <Pagination page={page} totalPages={data?.totalPages || 1} setPage={setPage} />
+      </Box>
     </Container>
   );
 };
